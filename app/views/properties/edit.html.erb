@@ -1,0 +1,27 @@
+<h2>Edit property</h2>
+
+<% if @property.errors.any? %>
+    <ul>
+    <% @property.errors.full_messages.each do|msg| %>
+    <li><%= msg%></li>
+    <% end %>
+    </ul>
+<% end %>
+
+<%= form_for @property do |f| %>
+    <p>
+        <%= f.label :property_name %>
+        <%= f.text_field :property_name %>
+    </p>
+    <p>
+        <%= f.label :description %>
+        <%= f.text_area :description %>
+    </p>
+    <p>`    
+        <%= f.label :value %>
+        <%= f.number_field :value %>
+    </p>
+    <p>
+        <%= f.submit %>
+    </p>
+<% end %>
