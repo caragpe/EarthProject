@@ -37,6 +37,13 @@ class PropertiesController < ApplicationController
         end
     end
     
+    def destroy
+        @property= Property.find(params[:id])
+        @property.destroy
+        flash[:destroy] = "Property was successfully deleted"
+        redirect_to properties_path
+    end
+    
     private
         def property_params
             params.require(:property).permit(:property_name,:description,:owner_id, :value)
