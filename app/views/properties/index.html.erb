@@ -9,7 +9,7 @@
     <tr>
         <td><%= property.property_name %></td>
         <td><%= property.description %></td>
-        <td><%= link_to "Show", property_path(property.id), method: :show %></td>
+        <td><%= link_to "Show", property_path(property.id), method: :get %></td>
         <td><%= link_to "Edit", edit_property_path(property.id) %></td>
         <td><%= link_to "Destroy", property_path(property.id), method: :delete, data: {confirm: "Are you sure?"} %></td>
     </tr>

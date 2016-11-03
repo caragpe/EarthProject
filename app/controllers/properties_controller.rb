@@ -1,4 +1,6 @@
 class PropertiesController < ApplicationController
+    #To remove duplication inside following methods:
+    before_action :set_property, only: [:edit, :update, :show, :destroy]
     
     def index
         @properties = Property.all
@@ -24,11 +26,11 @@ class PropertiesController < ApplicationController
     end
     
     def edit
-        @property = Property.find(params[:id])
+        #@property = Property.find(params[:id])
     end
     
     def update
-        @property = Property.find(params[:id])
+        #@property = Property.find(params[:id])
         if @property.update(property_params)
             flash[:notice] = "Property was successfully updated"
             redirect_to property_path(@property)
@@ -38,13 +40,17 @@ class PropertiesController < ApplicationController
     end
     
     def destroy
-        @property= Property.find(params[:id])
+        #@property= Property.find(params[:id])
         @property.destroy
         flash[:destroy] = "Property was successfully deleted"
         redirect_to properties_path
     end
     
     private
+        def set_property
+            @property= Property.find(params[:id])
+        end
+        
         def property_params
             params.require(:property).permit(:property_name,:description,:owner_id, :value)
         end
