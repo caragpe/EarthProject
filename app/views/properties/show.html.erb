@@ -5,3 +5,7 @@
 <p>
     Description: <%= @property.description %>
 </p>
+<p>
+    <%= link_to "Edit", edit_property_path(@property.id) %>
+    | <%= link_to "Back to list", properties_path %>
+</p>

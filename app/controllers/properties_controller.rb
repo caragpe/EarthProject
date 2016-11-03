@@ -1,4 +1,9 @@
 class PropertiesController < ApplicationController
+    
+    def index
+        @properties = Property.all
+    end
+    
     def new
         @property = Property.new
     end
@@ -33,7 +38,7 @@ class PropertiesController < ApplicationController
     end
     
     private
-    def property_params
-        params.require(:property).permit(:property_name,:description,:owner_id, :value)
-    end
+        def property_params
+            params.require(:property).permit(:property_name,:description,:owner_id, :value)
+        end
 end

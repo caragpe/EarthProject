@@ -1,0 +1,16 @@
+<h1>List of properties</h1>
+<p><%= link_to "Create new property" , new_property_path %></p>
+<table>
+    <tr>
+        <th>Property Name</th>
+        <th>Description</th>
+    </tr>    
+    <% @properties.each do |property| %>
+    <tr>
+        <td><%= property.property_name %></td>
+        <td><%= property.description %></td>
+        <td><%= link_to "Show", property_path(property.id) %></td>
+        <td><%= link_to "Edit", edit_property_path(property.id) %></td>
+    </tr>
+    <% end %>
+</table>
