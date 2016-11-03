@@ -6,14 +6,20 @@ class PropertiesController < ApplicationController
     def create
         #render plain: params[:property].inspect
         @property = Property.new(property_params)
-        @property.save
-        if @property.errors.any?
-            render plain: @property.errors.full_messages
+        if @property.save
+            flash[:notice] = "Property was successfully created"
+            redirect_to property_path(@property)
+        else
+            render 'new'
         end
+    end
+    
+    def show
+        @property = Property.find(params[:id])
     end
     
     private
     def property_params
-        params.require(:property).permit(:property_name,:description)
+        params.require(:property).permit(:property_name,:description,:owner_id, :value)
     end
 end

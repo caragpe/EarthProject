@@ -1,5 +1,13 @@
 <h2>New property</h2>
 
+<% if @property.errors.any? %>
+    <ul>
+    <% @property.errors.full_messages.each do|msg| %>
+    <li><%= msg%></li>
+    <% end %>
+    </ul>
+<% end %>
+
 <%= form_for @property do |f| %>
     <p>
         <%= f.label :property_name %>
