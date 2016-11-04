@@ -1,0 +1,60 @@
+$navbar-default-bg: #337ab7;
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+#logo {
+    float: left;
+    font-size: 1.7em;
+    letter-spacing: -1px;
+    font-weight: bold;
+}
+#logo:hover {
+    text-decoration: none;
+}
+
+.center {
+    text-align: center;
+}
+
+
+.jumbotron {
+    background-image: asset-url('ilustration_property.jpg');
+    height: 324px;
+}   
+
+.jumbotron h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    letter-spacing: -1px;
+    font-weight: bold;
+}
+
+// Next lines look for have the text in the navbar in
+// white color
+.navbar-default .navbar-brand,
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+    color: #FFF;
+}
+// Next lines look for have the text in the navbar in
+// white color
+.navbar-default .navbar-nav > li > a {
+    color: #FFF;
+}
+// Next lines look for have the text in the navbar in
+// white color
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+    color: #FFF;
+}
+// Next lines look for have the text in the navbar in
+// white color
+.navbar-default .navbar-text {
+    color: #FFF;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #FFF;
+}
