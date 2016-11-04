@@ -3,12 +3,15 @@ $navbar-default-bg: #337ab7;
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+body { padding-bottom: 70px; }
+
 #logo {
     float: left;
     font-size: 1.7em;
     letter-spacing: -1px;
     font-weight: bold;
 }
+
 #logo:hover {
     text-decoration: none;
 }
@@ -51,10 +54,24 @@ $navbar-default-bg: #337ab7;
 }
 // Next lines look for have the text in the navbar in
 // white color
-.navbar-default .navbar-text {
-    color: #FFF;
+
+
+
+#footer small{
+    float: left;
+    color: #fff;
 }
 
-.navbar-default .navbar-toggle .icon-bar {
-    background-color: #FFF;
+#footer a{
+    color: #fff;
+}
+
+#footer ul {
+    float: right;
+    list-style: none;
+}
+
+#footer ul li {
+    float: left;
+    margin-left: 15px;
 }
