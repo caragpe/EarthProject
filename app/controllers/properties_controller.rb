@@ -14,7 +14,7 @@ class PropertiesController < ApplicationController
         #render plain: params[:property].inspect
         @property = Property.new(property_params)
         if @property.save
-            flash[:notice] = "Property was successfully created"
+            flash[:success] = "Property was successfully created"
             redirect_to property_path(@property)
         else
             render 'new'
@@ -32,7 +32,7 @@ class PropertiesController < ApplicationController
     def update
         #@property = Property.find(params[:id])
         if @property.update(property_params)
-            flash[:notice] = "Property was successfully updated"
+            flash[:success] = "Property was successfully updated"
             redirect_to property_path(@property)
         else
             render 'edit'
@@ -42,7 +42,7 @@ class PropertiesController < ApplicationController
     def destroy
         #@property= Property.find(params[:id])
         @property.destroy
-        flash[:destroy] = "Property was successfully deleted"
+        flash[:danger] = "Property was successfully deleted"
         redirect_to properties_path
     end
     
