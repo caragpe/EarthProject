@@ -64,6 +64,17 @@ body { padding-bottom: 70px; }
     margin-top: 0px;
 }
 
+.property-title {
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.property-body {
+    border-top: 1px solid #eaeaea;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
 #footer small{
     float: left;
     color: #fff;
