@@ -1,9 +1,23 @@
 <% if @property.errors.any? %>
-    <ul>
-    <% @property.errors.full_messages.each do|msg| %>
-    <li><%= msg%></li>
-    <% end %>
-    </ul>
+    <div class="row">
+        <div class="col-xs-8 col-xs-offset-2">
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <h2 class="panel-title">
+                        <%= pluralize(@property.errors.count, "error") %>
+                        prevented this property from being saved.
+                        <div class="panel-body">
+                            <ul>
+                                <% @property.errors.full_messages.each do|msg| %>
+                                <li><%= msg%></li>
+                                <% end %>
+                            </ul>
+                        </div>
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
 <% end %>
 
 <div class="row">
