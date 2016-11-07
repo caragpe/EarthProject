@@ -55,7 +55,14 @@ body { padding-bottom: 70px; }
 // Next lines look for have the text in the navbar in
 // white color
 
+.property-actions {
+    border-top: 1px solid #eaeaea;
+    padding-top: 5px;
+}
 
+.description {
+    margin-top: 0px;
+}
 
 #footer small{
     float: left;
@@ -75,3 +82,4 @@ body { padding-bottom: 70px; }
     float: left;
     margin-left: 15px;
 }
+
