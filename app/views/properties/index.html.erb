@@ -9,6 +9,11 @@
             </div>
             <div class="article-body">
                 <%= truncate(property.description, length: 100) %>
+                    <div class="property-meta-details">
+                    <small>Created by: <%= property.user.username if property.user %>,
+                            <%= time_ago_in_words(property.created_at) %> ago,
+                            last update: <%= time_ago_in_words(property.created_at) %> ago</small>
+                </div>
             </div>
             <div class="property-actions">
                 <%= link_to "Edit this article", edit_property_path(property.id), class: "btn btn-xs btn-primary" %> 
