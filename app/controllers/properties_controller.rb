@@ -14,7 +14,7 @@ class PropertiesController < ApplicationController
         #render plain: params[:property].inspect
         @property = Property.new(property_params)
         #Workaround until user validation is added
-        @property.user = User.first
+        @property.user = current_user
         if @property.save
             flash[:success] = "Property was successfully created"
             redirect_to property_path(@property)
