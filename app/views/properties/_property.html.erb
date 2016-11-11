@@ -15,7 +15,7 @@
                             last update: <%= time_ago_in_words(property.created_at) %> ago</small>
                 </div>
             </div>
-            <% if (logged_in? && current_user == property.user) || current_user.admin? %>
+            <% if logged_in? && ((current_user == property.user) || current_user.admin?) %>
             <div class="property-actions">
                 <%= link_to "Edit this article", edit_property_path(property.id), class: "btn btn-xs btn-primary" %> 
                 <%= link_to "Delete this article", property_path(property.id), method: :delete, 
