@@ -59,7 +59,7 @@ class PropertiesController < ApplicationController
     end
     
     private def require_same_user
-        if current_user != @property.user
+        if (current_user != @property.user) && !current_user.admin
             flash[:danger] = "You can only edit or delete your own property"
             redirect_to root_path
         end

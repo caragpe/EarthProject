@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161108024328) do
+ActiveRecord::Schema.define(version: 20161111112719) do
 
   create_table "properties", force: :cascade do |t|
     t.string   "property_name"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20161108024328) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "password_digest"
+    t.boolean  "admin",           default: false
   end
 
 end
