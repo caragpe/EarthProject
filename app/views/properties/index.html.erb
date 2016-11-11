@@ -1,22 +1,12 @@
-<h1 align="center">List of properties</h1>
+<%# views/properties/index.html.erb %>
 
-<% @properties.each do |property| %>
-<div class="row">
-    <div class="class-xs-8 class-xs-offset-2">
-        <div class="well well-lg">
-            <div class="property-title">
-                <%= link_to property.property_name, property_path(property.id), method: :get %>
-            </div>
-            <div class="article-body">
-                <%= truncate(property.description, length: 100) %>
-            </div>
-            <div class="property-actions">
-                <%= link_to "Edit this article", edit_property_path(property.id), class: "btn btn-xs btn-primary" %> 
-                <%= link_to "Delete this article", property_path(property.id), method: :delete, 
-                                                                    data: {confirm: "Are you sure you want to delete this?"}, 
-                                                                    class: "btn btn-xs btn-danger"  %>
-            </div>
-        </div>
-    </div>
+<h1 align="center">List of properties</h1>
+<div align="center">
+    <%= will_paginate %>
 </div>
-<% end %>
+
+<%= render 'property', obj: @properties %>
+
+<div align="center">
+    <%= will_paginate %>
+</div>

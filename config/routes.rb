@@ -6,6 +6,13 @@ Rails.application.routes.draw do
   # root 'welcome#index'
   root 'pages#home'
   resources :properties
+  
+  get 'signup', to: 'users#new'
+  resources :users, except: [:new]
+  
+  get 'login', to: 'sessions#new'
+  post 'login', to: 'sessions#create'
+  delete 'login', to: 'sessions#destroy'
   #get 'pages/home', to: 'pages#home'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
