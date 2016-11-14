@@ -1,0 +1,19 @@
+<table>
+  <thead>
+    <tr>
+      <th>Filename</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @report.each do |report| %>
+      <tr>
+        <td><%= report.filename %></td>
+        <td><%= button_to 'Download', report, method: :get %></td>
+        <td><%= button_to 'Destroy', report, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

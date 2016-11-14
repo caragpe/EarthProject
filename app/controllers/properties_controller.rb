@@ -13,13 +13,27 @@ class PropertiesController < ApplicationController
     end
     
     def create
-        #render plain: params[:property].inspect
+        @report = Report.new(report_params)
         @property = Property.new(property_params)
         #Workaround until user validation is added
         @property.user = current_user
         if @property.save
-            flash[:success] = "Property was successfully created"
-            redirect_to property_path(@property)
+            if @report.filename?
+                @report.property = @property
+                if @report.save
+                    flash[:success] = "Property and report were successfully created"
+                    redirect_to property_path(@property)
+                else
+                    if @report.errors.any?
+                        @property.destroy
+                        check_report_error
+                    end
+                    render 'new'
+                end
+            else
+                flash[:success] = "Property was successfully created"
+                redirect_to property_path(@property)
+            end
         else
             render 'new'
         end
@@ -50,19 +64,35 @@ class PropertiesController < ApplicationController
         redirect_to properties_path
     end
     
-    private def set_property
-        @property= Property.find(params[:id])
-    end
-        
-    private def property_params
-        params.require(:property).permit(:property_name,:description,:owner_id, :value)
-    end
+    private 
     
-    private def require_same_user
-        if (current_user != @property.user) && !current_user.admin
-            flash[:danger] = "You can only edit or delete your own property"
-            redirect_to root_path
+        def set_property
+            @property= Property.find(params[:id])
         end
-    end
+            
+        def property_params
+            params.require(:property).permit(:property_name,:description,:owner_id, :value)
+        end
+        
+        def report_params
+            params.require(:property).permit(:file)
+        end
+        
+        def require_same_user
+            if (current_user != @property.user) && !current_user.admin
+                flash[:danger] = "You can only edit or delete your own property"
+                redirect_to root_path
+            end
+        end
+        
+        def check_report_error
+            if @report.errors.any?
+                @report.errors.full_messages.each do |msg|
+                    puts msg
+                    @property.errors.add(:report,msg)
+                end
+            end
+        end
+        
 
 end
