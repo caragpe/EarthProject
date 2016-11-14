@@ -23,6 +23,12 @@
     <h4 class="center description">Description:</h4>
     <hr>
     <%= simple_format(@property.description) %>
+    <% if !@property.reports.empty? %>
+        <hr>
+        <h4 class="uploaded-file">Report:</h4>
+        <hr>
+        <%= link_to "Download report", report_path(@property.reports.ids), method: :get %>
+    <% end %>
     <div class="property-actions">
         <% if (logged_in? && (current_user == @property.user) || current_user.admin?) %>
         <%= link_to "Edit this article", edit_property_path(@property.id), class: "btn btn-xs btn-primary" %> 
