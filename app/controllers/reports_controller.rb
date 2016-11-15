@@ -1,12 +1,12 @@
 class ReportsController < ApplicationController
     before_action :set_report, only: [:show, :edit, :update, :destroy]
     
-    # GET /reports
+    # GET /properties/:property_id/reports
     def index
         @report = Report.all
     end
     
-    # GET /reports/1
+    # GET /properties/:property_id/reports/1
     def show
       send_data(@report.file_contents, type: @report.content_type, filename: @report.filename)
     end

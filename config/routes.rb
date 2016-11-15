@@ -5,9 +5,11 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
   root 'pages#home'
-  resources :properties
+  resources :properties do
+    resources :reports
+  end
   resources :users, except: [:new]
-  resources :reports
+  #resources :reports
   
   get 'signup', to: 'users#new' 
   get 'login', to: 'sessions#new'
