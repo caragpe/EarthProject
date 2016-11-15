@@ -22,9 +22,19 @@
                     <%= f.text_area :description, rows: 10, class: "form-control", placeholder: "Description of the property", autofocus: true %> 
                 </div>
             </div>
+            <% if !@property.reports.empty? %>
             <div class="form-group">
                 <div class="control-label col-sm-2">
-                    <%= f.label :report %>
+                    Report
+                </div>
+                <div class="col-sm-8">
+                    <%= link_to @property.reports.last.filename, report_path(@property.reports.last.id), method: :get %>
+                </div>
+            </div>
+            <% end %>
+            <div class="form-group">
+                <div class="control-label col-sm-2">
+                    <%= f.label :report, "Add new"  %>
                 </div>
                 <div class="col-sm-8">
                     <%= f.file_field :file, class: "form-control", placeholder: "Report", autofocus: true %> 

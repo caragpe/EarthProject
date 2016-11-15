@@ -13,23 +13,14 @@ class PropertiesController < ApplicationController
     end
     
     def create
-        @report = Report.new(report_params)
+        #@report = Report.new(report_params)
         @property = Property.new(property_params)
+        @property.reports.new(report_params)
         #Workaround until user validation is added
         @property.user = current_user
         if @property.save
-            if @report.filename?
-                @report.property = @property
-                if @report.save
-                    flash[:success] = "Property and report were successfully created"
-                    redirect_to property_path(@property)
-                else
-                    if @report.errors.any?
-                        @property.destroy
-                        check_report_error
-                    end
-                    render 'new'
-                end
+            if @property.reports.last.filename?
+                add_update_report
             else
                 flash[:success] = "Property was successfully created"
                 redirect_to property_path(@property)
@@ -40,20 +31,26 @@ class PropertiesController < ApplicationController
     end
     
     def show
-        @property = Property.find(params[:id])
     end
     
     def edit
-        #@property = Property.find(params[:id])
     end
     
     def update
-        #@property = Property.find(params[:id])
-        if @property.update(property_params)
-            flash[:success] = "Property was successfully updated"
-            redirect_to property_path(@property)
+        if !@property.reports.empty?
+            @report_old = Report.find(@property.reports.ids)
+        end
+
+        @report = Report.new(report_params)
+        if @report.filename?
+            add_update_report
         else
-            render 'edit'
+            if @property.update(property_params)
+                flash[:success] = "Property was successfully updated"
+                redirect_to property_path(@property)
+            else
+                render 'edit'
+            end
         end
     end
     
@@ -85,10 +82,37 @@ class PropertiesController < ApplicationController
             end
         end
         
+        def add_update_report
+            if @property.reports.last.save
+                flash[:success] = "Property and report were successfully created"
+                redirect_to property_path(@property)
+            else
+                if @property.reports.last.errors.any?
+                    check_report_error
+                end
+            end
+        end
+        
+                
+#            @report.property = @property
+#            if @report.save
+#                if !@report_old.nil?
+#                    @report_old.last.destroy
+#                end
+#                flash[:success] = "Property and report were successfully created"
+#                redirect_to property_path(@property)
+#            else
+#                if @report.errors.any?
+#                    @property.destroy
+#                    check_report_error
+#                end
+#                render 'new'
+#            end
+#        end
+        
         def check_report_error
-            if @report.errors.any?
-                @report.errors.full_messages.each do |msg|
-                    puts msg
+            if @property.reports.last.errors.any?
+                @property.reports.last.errors.full_messages.each do |msg|
                     @property.errors.add(:report,msg)
                 end
             end
