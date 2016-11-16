@@ -3,7 +3,8 @@ class ReportsController < ApplicationController
     
     # GET /properties/:property_id/reports
     def index
-        @report = Report.all
+        @property = Property.find(params[:property_id])
+        @reports = @property.reports
     end
     
     # GET /properties/:property_id/reports/1
