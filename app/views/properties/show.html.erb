@@ -27,7 +27,11 @@
         <hr>
         <h4 class="uploaded-file">Report:</h4>
         <hr>
-        <%= link_to @property.reports.last.filename, report_path(@property.reports.last.id), method: :get %>
+        <% @property.reports.each do |report| %>
+                <%= link_to report.filename , [report.property, report] , method: :get %>
+                <% end %>
+                
+    
     <% end %>
     <div class="property-actions">
         <% if (logged_in? && (current_user == @property.user) || current_user.admin?) %>
