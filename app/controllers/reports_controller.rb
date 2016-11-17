@@ -1,4 +1,5 @@
 class ReportsController < ApplicationController
+    before_action :set_property, only: [:index, :edit, :update, :destroy, :new]
     before_action :set_report, only: [:show, :edit, :update, :destroy]
     
     # GET /properties/:property_id/reports
@@ -14,7 +15,7 @@ class ReportsController < ApplicationController
 
     # GET /reports/new
     def new
-        @report = Report.new
+        @report = @property.reports.new
     end
     
     # POST /reports
@@ -38,5 +39,8 @@ class ReportsController < ApplicationController
         
         def set_report
             @report = Report.find(params[:id])
+        end
+        def set_property
+            @property = Property.find(params[:property_id])
         end
 end
