@@ -24,33 +24,7 @@
     <hr>
     <%= simple_format(@property.description) %>
     <% if !@property.reports.empty? %>
-        <hr>
-        <h4 class="uploaded-file center">Reports</h4>
-        <hr>
-        <div class="row center">
-            <div class="col-md-4">
-                <strong>File title</strong>
-            </div>
-        </div>
-        </br>
-        <% @property.reports.each do |report| %>
-            <div class="row">
-                <div class="col-md-6">
-                    <%= report.title %>
-                </div>
-                <div class="col-md-2">
-                    <%= link_to "Download" , [report.property, report] , method: :get %>
-                </div>
-                <div class="col-md-2">
-                    <%= link_to "Update" , [report.property, report] , method: :put %>
-                </div>
-                <div class="col-md-2">
-                    <%= link_to "Remove" , [report.property, report] , method: :delete, 
-                                                            data: {confirm: "Are you sure you want to delete this?"} %>
-                </div>
-            </div>
-        <% end %>
-        </br>
+        <%= render 'reports/report', obj: @property %>
     <% end %>
     <div class="property-actions">
         <% if (logged_in? && (current_user == @property.user) || current_user.admin?) %>

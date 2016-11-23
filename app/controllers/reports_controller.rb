@@ -4,24 +4,23 @@ class ReportsController < ApplicationController
     
     # GET /properties/:property_id/reports
     def index
-        @property = Property.find(params[:property_id])
+        #@property = Property.find(params[:property_id])
         @reports = @property.reports
     end
     
-    # GET /properties/:property_id/reports/1
+    # GET /properties/:property_id/reports/:id(.:format) 
     def show
       send_data(@report.file_contents, type: @report.content_type, filename: @report.filename)
     end
 
-    # GET /reports/new
+    # GET /properties/:property_id/reports/new(.:format)
     def new
         @report = @property.reports.new
     end
     
-    # POST /reports
+    # POST /properties/:property_id/reports(.:format)
     def create
         @report = @property.reports.new(report_params)
-        
         if @report.save
             flash[:success] = "Report was successfully uploaded"
             redirect_to property_path(@property)
@@ -30,11 +29,17 @@ class ReportsController < ApplicationController
         end
     end
     
-
+    # GET /properties/:property_id/reports/:id/edit(.:format)
+    def edit
+    end
+    
+    
+    # PATCH || PUT  /properties/:property_id/reports/:id(.:format)
     def update
     
     end
 
+    # DELETE /properties/:property_id/reports/:id(.:format)
     def destroy
     
     end

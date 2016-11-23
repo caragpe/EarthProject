@@ -14,16 +14,11 @@ class PropertiesController < ApplicationController
     
     def create
         @property = Property.new(property_params)
-    #    @property.reports.new(report_params)
         #Workaround until user validation is added
         @property.user = current_user
         if @property.save
-    #    if @property.reports.last.filename?
-    #            add_update_report
-    #        else
-                flash[:success] = "Property was successfully created"
-                redirect_to property_path(@property)
-    #        end
+            flash[:success] = "Property was successfully created"
+            redirect_to property_path(@property)
         else
             render 'new'
         end
