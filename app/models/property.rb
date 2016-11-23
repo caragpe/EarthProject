@@ -5,4 +5,5 @@ class Property < ActiveRecord::Base
     validates :description, presence: true
     validates :user_id, presence: true
     #validates :owner_id, presence: true
+    
 end

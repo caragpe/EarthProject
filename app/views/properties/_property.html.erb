@@ -12,7 +12,7 @@
                     <div class="property-meta-details">
                     <small>Created by: <%= property.user.username if property.user %>,
                             <%= time_ago_in_words(property.created_at) %> ago,
-                            last update: <%= time_ago_in_words(property.created_at) %> ago</small>
+                            last update: <%= time_ago_in_words(property.updated_at) %> ago</small>
                 </div>
             </div>
             <% if logged_in? && ((current_user == property.user) || current_user.admin?) %>

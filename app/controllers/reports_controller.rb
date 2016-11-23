@@ -1,5 +1,5 @@
 class ReportsController < ApplicationController
-    before_action :set_property, only: [:index, :edit, :update, :destroy, :new]
+    before_action :set_property, except: [:show]
     before_action :set_report, only: [:show, :edit, :update, :destroy]
     
     # GET /properties/:property_id/reports
@@ -20,7 +20,14 @@ class ReportsController < ApplicationController
     
     # POST /reports
     def create
+        @report = @property.reports.new(report_params)
         
+        if @report.save
+            flash[:success] = "Report was successfully uploaded"
+            redirect_to property_path(@property)
+        else
+            render 'new'
+        end
     end
     
 
@@ -34,7 +41,7 @@ class ReportsController < ApplicationController
     
     private 
         def report_params
-            params.require(:report).permit(:file)
+            params.require(:report).permit(:file,:title,:year)
         end
         
         def set_report
