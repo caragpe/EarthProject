@@ -3,11 +3,12 @@ class Report < ActiveRecord::Base
     validates :title, presence: true, length: { minimum: 6, maximum: 50 }
     validates :year, presence: true
     validates :file_contents, presence: true 
+    
+   
 
     
     #validates_size_of :file, maximum: 1.megabytes, message: "should be less than 1MB"
     validate :file_size_under_two_mb
-    
     
     def initialize(params = {})
         file = params.delete(:file)
@@ -16,8 +17,8 @@ class Report < ActiveRecord::Base
             self.filename = sanitize_filename(file.original_filename)
             self.content_type = file.content_type
             self.file_contents = file.read
-#        else
-#            errors.add(:file, 'Does not exist.')
+#   #     else
+#   #         errors.add(:file, 'Does not exist.')
         end
     end
     

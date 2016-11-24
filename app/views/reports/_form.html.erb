@@ -15,9 +15,23 @@
                 </div>
                 <div class="col-sm-2"></div>
             </div>
+            <%if !@report.filename.nil? %>
+            <div class="form-group">
+                <div class="control-label existing-report col-sm-2">
+                    <%= "Current file"  %>
+                </div>
+                <div class="col-sm-8">
+                    <%= link_to @report.title , [@report.property, @report] , method: :get %>
+                </div>
+            </div>
+            <% end %>
             <div class="form-group">
                 <div class="control-label col-sm-2">
-                    <%= f.label :file, "File"  %>
+                    <% if !@report.filename.nil? %>
+                        <%= f.label :file, "New file"  %>
+                    <% else %>
+                        <%= f.label :file, "File"  %>
+                    <% end %>
                 </div>
                 <div class="col-sm-8">
                     <%= f.file_field :file, class: "form-control", placeholder: "Report", autofocus: true %> 
@@ -39,7 +53,7 @@
             </div>
         <% end %>
         <div class="col-xs-4 col-xs-offset-4">
-        [ <%= link_to "Cancel request and return to reports listing", "#" %> ]
+        [ <%= link_to "Cancel request and return to reports listing", property_path(@property) %> ]
         </div>
     </div>
 </div>
