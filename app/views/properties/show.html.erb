@@ -23,12 +23,18 @@
     <h4 class="center description">Description:</h4>
     <hr>
     <%= simple_format(@property.description) %>
+    <% if logged_in? %>
+        <% if ((current_user == @property.user) || current_user.admin?) %>
+            <% if !@property.reports.empty? %>
+                <%= render 'reports/report', obj: @property %>
+            <% end %>
     <div class="property-actions">
-        <% if (logged_in? && (current_user == @property.user) || current_user.admin?) %>
-        <%= link_to "Edit this article", edit_property_path(@property.id), class: "btn btn-xs btn-primary" %> 
-        <%= link_to "Delete this article", properties_path(@property), method: :delete, 
-                                                            data: {confirm: "Are you sure you want to delete this?"}, 
-                                                            class: "btn btn-xs btn-danger"  %>
+            <%= link_to "Edit this property", edit_property_path(@property.id), class: "btn btn-xs btn-primary" %>
+            <%= link_to "Add new report", new_property_report_path(@property.id), class: "btn btn-xs btn-info" %> 
+            <%= link_to "Delete this property", properties_path(@property), method: :delete, 
+                                                                data: {confirm: "Are you sure you want to delete this?"}, 
+                                                                class: "btn btn-xs btn-danger"  %>
+            <% end %>
         <% end %>
         <%= link_to "View all", properties_path, class: "btn btn-xs btn-success"  %>
 
