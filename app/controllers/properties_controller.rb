@@ -65,9 +65,9 @@ class PropertiesController < ApplicationController
             params.require(:property).permit(:property_name,:description,:owner_id, :value)
         end
         
-        def report_params
-            params.require(:property).permit(:file)
-        end
+#        def report_params
+#            params.require(:property).permit(:file)
+#        end
         
         def require_same_user
             if (current_user != @property.user) && !current_user.admin
@@ -76,16 +76,16 @@ class PropertiesController < ApplicationController
             end
         end
         
-        def add_update_report
-            if @property.reports.last.save
-                flash[:success] = "Property and report were successfully created"
-                redirect_to property_path(@property)
-            else
-                if @property.reports.last.errors.any?
-                    check_report_error
-                end
-            end
-        end
+#        def add_update_report
+#            if @property.reports.last.save
+#                flash[:success] = "Property and report were successfully created"
+#                redirect_to property_path(@property)
+#            else
+#                if @property.reports.last.errors.any?
+#                    check_report_error
+#                end
+#            end
+#        end
         
                 
 #            @report.property = @property
@@ -104,13 +104,13 @@ class PropertiesController < ApplicationController
 #            end
 #        end
         
-        def check_report_error
-            if @property.reports.last.errors.any?
-                @property.reports.last.errors.full_messages.each do |msg|
-                    @property.errors.add(:report,msg)
-                end
-            end
-        end
+#        def check_report_error
+#            if @property.reports.last.errors.any?
+#                @property.reports.last.errors.full_messages.each do |msg|
+#                    @property.errors.add(:report,msg)
+#                end
+#            end
+#        end
         
 
 end

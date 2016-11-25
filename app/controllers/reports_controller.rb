@@ -1,6 +1,8 @@
 class ReportsController < ApplicationController
     before_action :set_property, except: [:show]
     before_action :set_report, only: [:show, :edit, :update, :destroy]
+    before_action :require_user
+    before_action :require_same_user
     
     # GET /properties/:property_id/reports
     def index
@@ -36,7 +38,7 @@ class ReportsController < ApplicationController
     
     # PATCH || PUT  /properties/:property_id/reports/:id(.:format)
     def update
-        debugger
+#        debugger
         if !params[:report][:file].nil?
             @new_report = @property.reports.new(report_params)
             if @new_report.save
@@ -84,4 +86,12 @@ class ReportsController < ApplicationController
         def set_property
             @property = Property.find(params[:property_id])
         end
+                
+        def require_same_user
+            if (current_user != @property.user) && !current_user.admin
+                flash[:danger] = "You can only work with reports from your own property"
+                redirect_to root_path
+            end
+        end
+        
 end
