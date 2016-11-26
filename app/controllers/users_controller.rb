@@ -4,7 +4,11 @@ class UsersController < ApplicationController
       before_action :require_admin, only: [:destroy]
    
    def index
-      @users = User.paginate(page: params[:page],per_page: 5)
+      if current_user.admin?
+         @users = User.paginate(page: params[:page],per_page: 5)
+      else
+         @users = User.where(id: session[:user_id])
+      end
    end
 
    def new

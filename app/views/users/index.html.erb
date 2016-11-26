@@ -1,9 +1,10 @@
 <%# views/users/index.html.erb %>
-
-<h1 align="center">All users</h1>
+<h1 align="center">User page</h1>
 
 <div align="center">
-    <%= will_paginate %>
+    <% if current_user.admin? %>
+        <%= will_paginate %>
+    <% end %>
     <% @users.each do |user| %>
         <ul class="listing">
             <div class="row">
@@ -25,5 +26,7 @@
             </div>
         </ul>
     <% end %>
-    <%= will_paginate %>
+    <% if current_user.admin? %>
+        <%= will_paginate %>
+    <% end %>
 </div>
