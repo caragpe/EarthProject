@@ -7,7 +7,11 @@ class PropertiesController < ApplicationController
     before_action :require_same_user, only: [:edit, :update, :destroy]
     
     def index
-        @properties = Property.paginate(page: params[:page],per_page: 5)
+      if current_user.admin?
+         @properties = Property.paginate(page: params[:page],per_page: 5)
+      else
+         @properties = Property.where(user_id: session[:user_id]).paginate(page: params[:page],per_page: 5)
+      end
     end
     
     def new
