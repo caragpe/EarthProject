@@ -15,7 +15,8 @@
                 </div>
                 <div class="col-sm-2"></div>
             </div>
-            <%if !@report.filename.nil? %>
+            <% #Following 15 sec are mean not to display an upload that it has just failed %>
+            <%if !@report.filename.nil? && ((@report.updated_at + 15) < Time.now())%>
             <div class="form-group">
                 <div class="control-label existing-report col-sm-2">
                     <%= "Current file"  %>
