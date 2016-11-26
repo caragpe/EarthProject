@@ -4,7 +4,7 @@ class PropertiesController < ApplicationController
     #Adding security layer. It should protect also Reports controller!
     before_action :require_user
     #ToDo should I block access to any other property unless owner or admin?
-    before_action :require_same_user, only: [:edit, :update, :destroy]
+    before_action :require_same_user, only: [:edit, :show, :update, :destroy]
     
     def index
       if current_user.admin?
