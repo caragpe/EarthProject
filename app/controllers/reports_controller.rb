@@ -2,6 +2,7 @@ class ReportsController < ApplicationController
     before_action :set_property
     before_action :set_report, only: [:show, :edit, :update, :destroy]
     before_action :require_user
+    #In this case, following line allows admin to modify it!
     before_action :require_same_user
     
     # GET /properties/:property_id/reports
@@ -55,16 +56,6 @@ class ReportsController < ApplicationController
                 render 'edit'
             end
         end
-        
-        #if @report.update(report_params)\
-#        debugger
-#        if @new_report.save
-#            @report.destroy
-#            flash[:success] = "Report was successfully updated"
-#            redirect_to property_path(@property)
-#        else
-#            render 'edit'
-#        end
     end
 
     # DELETE /properties/:property_id/reports/:id(.:format)
@@ -87,7 +78,7 @@ class ReportsController < ApplicationController
         end
                 
         def require_same_user
-            if (current_user != @property.user) || !current_user.admin
+            if (current_user != @property.user) && !current_user.admin
                 flash[:danger] = "You can only work with reports from your own property"
                 redirect_to root_path
             end

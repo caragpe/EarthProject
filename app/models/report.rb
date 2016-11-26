@@ -3,13 +3,9 @@ class Report < ActiveRecord::Base
     validates :title, presence: true, length: { minimum: 6, maximum: 50 }
     validates :year, presence: true
     validates :file_contents, presence: true
-    
-    #validate :file_present
-   
 
-    
-    #validates_size_of :file, maximum: 1.megabytes, message: "should be less than 1MB"
     validate :file_size_under_two_mb, if: :file_present
+   
     
     def initialize(params = {})
         
